@@ -7,7 +7,7 @@ const app = express();
 
 const dominiosPermitidos = [
   'http://localhost:5173', 
-  'https://tu-proyecto.vercel.app' // REEMPLAZAR
+  process.env.FRONTEND_URL
 ];
 
 app.use(cors({
