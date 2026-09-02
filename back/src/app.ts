@@ -13,9 +13,11 @@ const dominiosPermitidos = [
 app.use(cors({
   origin: function (origin, callback) {
     
-    if (!origin || dominiosPermitidos.indexOf(origin) !== -1) {
+    if (!origin || dominiosPermitidos.includes(origin)) {
       callback(null, true);
     } else {
+      
+      console.error(`🚨 CORS BLOQUEADO: El origen '${origin}' no está en la lista:`, dominiosPermitidos);
       callback(new Error('Bloqueado por CORS'));
     }
   },
@@ -23,6 +25,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 
 app.use('/users/', userRoutes);
